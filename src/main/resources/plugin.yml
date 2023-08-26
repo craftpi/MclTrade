@@ -1,0 +1,6 @@
+name: MclTrade
+version: '${project.version}'
+main: org.mclroleplay.mcltrade.MclTrade
+api-version: '1.20'
+authors: [craftpi, SkyLightEffect]
+description: Ein Plugin, das NPCs ein Iventar zum traden zwischen Städten gibt
