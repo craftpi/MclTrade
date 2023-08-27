@@ -5,3 +5,16 @@ api-version: '1.20'
 authors: [craftpi, SkyLightEffect]
 description: Ein Plugin, das NPCs ein Iventar zum traden zwischen Städten gibt
 depend: [Citizens]
+prefix: MCLSystem
+commands:
+ trade:
+  description: Öffnet ein Handelmenü
+  aliases: [tr, trm]
+  permission: mcltrade.trade 
+  permission-message: You do not have permission to use this command.
+  usage: "Usage: /<command> "
+permissions:
+ mcltrade.*:
+  description: Allows you to use the command all trade commands
+ mcltrade.trade:
+  description: Allows you to use the command /trade
