@@ -14,6 +14,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.mclroleplay.mcltrade.commands.TradeCommand;
+import org.mclroleplay.mcltrade.config.ConfigSave;
 
 public final class MclTrade extends JavaPlugin {
 
@@ -35,6 +36,10 @@ public final class MclTrade extends JavaPlugin {
         // Commands
         this.getCommand("trade").setExecutor(new TradeCommand());
 
+        //config
+        ConfigSave.create();
+
+        //Economy setup
         if (!setupEconomy() ) {
             getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
