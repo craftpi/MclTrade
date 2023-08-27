@@ -4,13 +4,16 @@ import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.mclroleplay.mcltrade.commands.TradeCommand;
 
 public final class MclTrade extends JavaPlugin {
 
@@ -22,16 +25,23 @@ public final class MclTrade extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        // Enable info
         pdf = this.getDescription();
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + pdf.getName() + " " + pdf.getVersion() + " has been enabled.");
+
+        PluginManager pluginManager = Bukkit.getPluginManager();
+        pluginManager.registerEvents(new TradeCommand(), this);
+
+        // Commands
+        this.getCommand("trade").setExecutor(new TradeCommand());
 
         if (!setupEconomy() ) {
             getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        setupPermissions();
-        setupChat();
+        //setupPermissions();
+        //setupChat();
     }
 
     private boolean setupEconomy() {
