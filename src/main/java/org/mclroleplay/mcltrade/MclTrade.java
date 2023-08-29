@@ -1,27 +1,32 @@
 package org.mclroleplay.mcltrade;
 
-import net.milkbowl.vault.chat.Chat;
+import dev.dejvokep.boostedyaml.YamlDocument;
+import dev.dejvokep.boostedyaml.dvs.versioning.BasicVersioning;
+import dev.dejvokep.boostedyaml.settings.dumper.DumperSettings;
+import dev.dejvokep.boostedyaml.settings.general.GeneralSettings;
+import dev.dejvokep.boostedyaml.settings.loader.LoaderSettings;
+import dev.dejvokep.boostedyaml.settings.updater.UpdaterSettings;
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
-import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.mclroleplay.mcltrade.commands.TradeCommand;
 import org.mclroleplay.mcltrade.config.ConfigSave;
+
+import java.io.File;
+import java.io.IOException;
 
 public final class MclTrade extends JavaPlugin {
 
     private static Economy econ = null;
-    private static Permission perms = null;
-    private static Chat chat = null;
+  //  private static Permission perms = null;
+  //  private static Chat chat = null;
     public static PluginDescriptionFile pdf;
+    //public void pl = JavaPlugin.getPlugin();
+    private YamlDocument config;
 
     @Override
     public void onEnable() {
@@ -30,6 +35,7 @@ public final class MclTrade extends JavaPlugin {
         pdf = this.getDescription();
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + pdf.getName() + " " + pdf.getVersion() + " has been enabled.");
 
+        //events
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new TradeCommand(), this);
 
@@ -39,14 +45,20 @@ public final class MclTrade extends JavaPlugin {
         //config
         ConfigSave.create();
 
+        // Create and update the file
+        try {
+            config = YamlDocument.create(new File(getDataFolder(), "config.yml"), getResource("config.yml"),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file-version")).build());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
         //Economy setup
         if (!setupEconomy() ) {
             getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        //setupPermissions();
-        //setupChat();
     }
 
     private boolean setupEconomy() {
@@ -60,7 +72,7 @@ public final class MclTrade extends JavaPlugin {
         econ = rsp.getProvider();
         return econ != null;
     }
-
+/*
     private boolean setupChat() {
         RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
         chat = rsp.getProvider();
@@ -72,42 +84,12 @@ public final class MclTrade extends JavaPlugin {
         perms = rsp.getProvider();
         return perms != null;
     }
-
-    public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-        if(!(sender instanceof Player)) {
-            getLogger().info("Only players are supported for this Example Plugin, but you should not do this!!!");
-            return true;
-        }
-
-        Player player = (Player) sender;
-
-        if(command.getLabel().equals("test-economy")) {
-            // Lets give the player 1.05 currency (note that SOME economic plugins require rounding!)
-            sender.sendMessage(String.format("You have %s", econ.format(econ.getBalance(player.getName()))));
-            EconomyResponse r = econ.depositPlayer(player, 1.05);
-            if(r.transactionSuccess()) {
-                sender.sendMessage(String.format("You were given %s and now have %s", econ.format(r.amount), econ.format(r.balance)));
-            } else {
-                sender.sendMessage(String.format("An error occured: %s", r.errorMessage));
-            }
-            return true;
-        } else if(command.getLabel().equals("test-permission")) {
-            // Lets test if user has the node "example.plugin.awesome" to determine if they are awesome or just suck
-            if(perms.has(player, "example.plugin.awesome")) {
-                sender.sendMessage("You are awesome!");
-            } else {
-                sender.sendMessage("You suck!");
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
+*/
 
     public static Economy getEconomy() {
         return econ;
     }
-
+/*
     public static Permission getPermissions() {
         return perms;
     }
@@ -115,7 +97,7 @@ public final class MclTrade extends JavaPlugin {
     public static Chat getChat() {
         return chat;
     }
-
+*/
     @Override
     public void onDisable() {
         // Plugin shutdown logic
