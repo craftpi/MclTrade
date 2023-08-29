@@ -8,12 +8,16 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.mclroleplay.mcltrade.MclTrade;
+import org.mclroleplay.mcltrade.config.ConfigSave;
 
-import java.util.ResourceBundle;
+import java.util.List;
 
 public class InvCreate implements Listener {
-    public static String invName = MainCFG.getInfName();
+
+    public static String config (String st){
+        return ConfigSave.query(st);
+    }
+    public static String invName = config("");
     public static Inventory invCreate() {
 
         Inventory i = Bukkit.getServer().createInventory(null, 6 * 9, invName);
@@ -40,7 +44,7 @@ public class InvCreate implements Listener {
 
     // Klicken sperren
     @EventHandler
-    public static void eventCanceld(InventoryClickEvent e) {
+    public static void eventCancel(InventoryClickEvent e) {
 
         // Event set Cancelled
         if (e.getView().getTitle().equals(invName)) {

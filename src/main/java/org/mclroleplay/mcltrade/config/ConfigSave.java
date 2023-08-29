@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class ConfigSave {
-
     private static MclTrade pl;
     private static YamlDocument config;
     public static void create() {
@@ -22,6 +21,10 @@ public class ConfigSave {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static String query(String st){
+        return config.getString(st);
     }
 }
 
