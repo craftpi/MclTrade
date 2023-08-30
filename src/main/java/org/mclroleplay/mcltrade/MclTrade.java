@@ -17,7 +17,6 @@ import org.mclroleplay.mcltrade.commands.TradeCommand;
 import org.mclroleplay.mcltrade.config.ConfigSave;
 
 import java.io.File;
-import java.io.IOException;
 
 public final class MclTrade extends JavaPlugin {
 
@@ -25,8 +24,11 @@ public final class MclTrade extends JavaPlugin {
   //  private static Permission perms = null;
   //  private static Chat chat = null;
     public static PluginDescriptionFile pdf;
-    //public void pl = JavaPlugin.getPlugin();
+
     private YamlDocument config;
+
+    public MclTrade() {
+    }
 
     @Override
     public void onEnable() {
@@ -43,8 +45,8 @@ public final class MclTrade extends JavaPlugin {
         this.getCommand("trade").setExecutor(new TradeCommand());
 
         //config
-        ConfigSave.create();
-
+        new ConfigSave().create(this);
+/*
         // Create and update the file
         try {
             config = YamlDocument.create(new File(getDataFolder(), "config.yml"), getResource("config.yml"),
@@ -52,7 +54,7 @@ public final class MclTrade extends JavaPlugin {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
+*/
         //Economy setup
         if (!setupEconomy() ) {
             getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));

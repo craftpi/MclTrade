@@ -36,8 +36,7 @@
                     <relocations>
                         <relocation>
                             <pattern>dev.dejvokep.boostedyaml</pattern>
-                            <!-- Replace this -->
-                            <shadedPattern>me.plugin.libs</shadedPattern>
+                            <shadedPattern>org.mclroleplay.mcltrade.lib</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>

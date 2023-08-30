@@ -17,26 +17,26 @@ public class InvCreate implements Listener {
     public static String config (String st){
         return ConfigSave.query(st);
     }
-    public static String invName = config("");
+    public static String invName = config("tradegui-name");
     public static Inventory invCreate() {
 
         Inventory i = Bukkit.getServer().createInventory(null, 6 * 9, invName);
 
-        List<String> spawns = config.getString("join-message").getSpawns();
+        //List<String> spawns = config.getString("join-message").getSpawns();
 
         int slot = 9;
 
-        for (int j = 0; j < spawns.size(); j++) {
+       // for (int j = 0; j < spawns.size(); j++) {
 
-            slot += 1;
+          //  slot += 1;
 
             ItemStack tName = new ItemStack(Material.FILLED_MAP);
             ItemMeta me = tName.getItemMeta();
-            me.setDisplayName("§c" + spawns.get(j));
+           // me.setDisplayName("§c" + spawns.get(j));
             tName.setItemMeta(me);
             i.setItem(slot, tName);
 
-        }
+       // }
 
         return i;
 
