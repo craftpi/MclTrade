@@ -1,10 +1,6 @@
 package org.mclroleplay.mcltrade.config;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
-import dev.dejvokep.boostedyaml.settings.dumper.DumperSettings;
-import dev.dejvokep.boostedyaml.settings.general.GeneralSettings;
-import dev.dejvokep.boostedyaml.settings.loader.LoaderSettings;
-import dev.dejvokep.boostedyaml.settings.updater.UpdaterSettings;
 import org.mclroleplay.mcltrade.MclTrade;
 
 import java.io.File;
@@ -18,7 +14,7 @@ public class ConfigSave {
     public void create(MclTrade pl) {
         this.pl =pl;
         try {
-            config = YamlDocument.create;
+            config = YamlDocument.create(new File(pl.getDataFolder(), "config.yml"));
             config.save();
         } catch (IOException ex) {
             ex.printStackTrace();

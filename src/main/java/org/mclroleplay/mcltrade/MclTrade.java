@@ -17,6 +17,7 @@ import org.mclroleplay.mcltrade.commands.TradeCommand;
 import org.mclroleplay.mcltrade.config.ConfigSave;
 
 import java.io.File;
+import java.io.IOException;
 
 public final class MclTrade extends JavaPlugin {
 
