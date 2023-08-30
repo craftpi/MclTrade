@@ -14,7 +14,7 @@ public class ConfigSave {
     public void create(MclTrade pl) {
         this.pl =pl;
         try {
-            config = YamlDocument.create(new File(pl.getDataFolder(), "config.yml"));
+            config = YamlDocument.create(new File(pl.getDataFolder(), "config.yml"),pl.getResource("config.yml"));
             config.save();
         } catch (IOException ex) {
             ex.printStackTrace();

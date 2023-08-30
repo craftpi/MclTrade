@@ -6,7 +6,7 @@
 
     <groupId>org.mclroleplay</groupId>
     <artifactId>MclTrade</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>MclTrade</name>
@@ -36,7 +36,7 @@
                     <relocations>
                         <relocation>
                             <pattern>dev.dejvokep.boostedyaml</pattern>
-                            <shadedPattern>org.mclroleplay.mcltrade.lib</shadedPattern>
+                            <shadedPattern>org.mclroleplay.mcltrade.libs</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
