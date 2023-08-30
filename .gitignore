@@ -130,3 +130,6 @@ local.properties
 .settings/
 .loadpath
 .launch
+
+# visulecode
+.env.development
