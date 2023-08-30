@@ -21,7 +21,7 @@ public class ConfigSave {
         }
 
     }
-
+//teset
     public static String query(String st){
         return config.getString(st);
     }
