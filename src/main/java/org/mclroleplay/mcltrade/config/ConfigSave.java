@@ -5,24 +5,38 @@ import org.mclroleplay.mcltrade.MclTrade;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class ConfigSave {
-    private MclTrade pl ;
 
-    private static YamlDocument config;
+    private static YamlDocument configconfig;
+    private static YamlDocument configprice;
 
-    public void create(MclTrade pl) {
-        this.pl =pl;
+    public void createconfig(MclTrade pl) {
         try {
-            config = YamlDocument.create(new File(pl.getDataFolder(), "config.yml"),pl.getResource("config.yml"));
-            config.save();
+            configconfig = YamlDocument.create(new File(pl.getDataFolder(), "config.yml"), Objects.requireNonNull(pl.getResource("config.yml")));
+            configconfig.save();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
     }
-    public static String query(String st){
-        return config.getString(st);
+    public static String queryconfig(String st){
+        return configconfig.getString(st);
+    }
+
+    public void createprice(MclTrade pl) {
+        try {
+            configprice = YamlDocument.create(new File(pl.getDataFolder(), "price.yml"),pl.getResource("price.yml"));
+            configprice.save();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public static String queryprice(String st){
+        return configprice.getString(st);
     }
 }
 

@@ -1,9 +1,8 @@
 # File version (do NOT edit):
 file-version: 1
-#hjjjjjjjjjjj
 tradegui-name: "Trading"
-item deposit: 15
-item purchase: 10
-item kind: wood
-item availability:
-default pirce: 50
+item-deposit: 15
+item-purchase: 10
+item-kind: wood
+item-availability:
+default-pirce: 50

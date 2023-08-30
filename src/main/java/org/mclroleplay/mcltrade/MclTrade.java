@@ -1,11 +1,5 @@
 package org.mclroleplay.mcltrade;
 
-import dev.dejvokep.boostedyaml.YamlDocument;
-import dev.dejvokep.boostedyaml.dvs.versioning.BasicVersioning;
-import dev.dejvokep.boostedyaml.settings.dumper.DumperSettings;
-import dev.dejvokep.boostedyaml.settings.general.GeneralSettings;
-import dev.dejvokep.boostedyaml.settings.loader.LoaderSettings;
-import dev.dejvokep.boostedyaml.settings.updater.UpdaterSettings;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,9 +9,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mclroleplay.mcltrade.commands.TradeCommand;
 import org.mclroleplay.mcltrade.config.ConfigSave;
-
-import java.io.File;
-import java.io.IOException;
+import org.mclroleplay.mcltrade.events.InvCreate;
 
 public final class MclTrade extends JavaPlugin {
 
@@ -25,8 +17,6 @@ public final class MclTrade extends JavaPlugin {
   //  private static Permission perms = null;
   //  private static Chat chat = null;
     public static PluginDescriptionFile pdf;
-
-    private YamlDocument config;
 
     public MclTrade() {
     }
@@ -41,13 +31,15 @@ public final class MclTrade extends JavaPlugin {
         //events
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new TradeCommand(), this);
+        pluginManager.registerEvents(new InvCreate(), this);
 
         // Commands
         this.getCommand("trade").setExecutor(new TradeCommand());
 
         //config
-        new ConfigSave().create(this);
-/*
+        new ConfigSave().createconfig(this);
+        new ConfigSave().createprice(this);
+    /*
         // Create and update the file
         try {
             config = YamlDocument.create(new File(getDataFolder(), "config.yml"), getResource("config.yml"),
@@ -60,7 +52,6 @@ public final class MclTrade extends JavaPlugin {
         if (!setupEconomy() ) {
             getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
-            return;
         }
     }
 

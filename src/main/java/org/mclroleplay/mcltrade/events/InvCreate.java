@@ -10,12 +10,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.mclroleplay.mcltrade.config.ConfigSave;
 
-import java.util.List;
-
 public class InvCreate implements Listener {
 
     public static String config (String st){
-        return ConfigSave.query(st);
+        return ConfigSave.queryconfig(st);
     }
     public static String invName = config("tradegui-name");
     public static Inventory invCreate() {
@@ -26,9 +24,9 @@ public class InvCreate implements Listener {
 
         int slot = 9;
 
-       // for (int j = 0; j < spawns.size(); j++) {
+        for (int j = 0; j < 8; j++) {
 
-          //  slot += 1;
+            slot += 1;
 
             ItemStack tName = new ItemStack(Material.FILLED_MAP);
             ItemMeta me = tName.getItemMeta();
@@ -36,7 +34,7 @@ public class InvCreate implements Listener {
             tName.setItemMeta(me);
             i.setItem(slot, tName);
 
-       // }
+        }
 
         return i;
 
@@ -54,8 +52,6 @@ public class InvCreate implements Listener {
                 e.setCancelled(true);
 
             }
-
         }
-
     }
 }
