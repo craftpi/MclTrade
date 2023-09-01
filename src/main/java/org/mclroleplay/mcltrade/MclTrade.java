@@ -28,6 +28,10 @@ public final class MclTrade extends JavaPlugin {
         pdf = this.getDescription();
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + pdf.getName() + " " + pdf.getVersion() + " has been enabled.");
 
+        //config
+        new ConfigSave().createconfig(this);
+        new ConfigSave().createprice(this);
+
         //events
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new TradeCommand(), this);
@@ -36,9 +40,7 @@ public final class MclTrade extends JavaPlugin {
         // Commands
         this.getCommand("trade").setExecutor(new TradeCommand());
 
-        //config
-        new ConfigSave().createconfig(this);
-        new ConfigSave().createprice(this);
+
     /*
         // Create and update the file
         try {

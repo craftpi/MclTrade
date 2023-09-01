@@ -10,6 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.mclroleplay.mcltrade.config.ConfigSave;
 
+import java.util.List;
+
 public class InvCreate implements Listener {
 
     public static String config (String st){
@@ -20,7 +22,7 @@ public class InvCreate implements Listener {
 
         Inventory i = Bukkit.getServer().createInventory(null, 6 * 9, invName);
 
-        //List<String> spawns = config.getString("join-message").getSpawns();
+       // List<String> Items = config.getString("join-message").getSpawns();
 
         int slot = 9;
 
@@ -30,7 +32,7 @@ public class InvCreate implements Listener {
 
             ItemStack tName = new ItemStack(Material.FILLED_MAP);
             ItemMeta me = tName.getItemMeta();
-           // me.setDisplayName("§c" + spawns.get(j));
+            me.setDisplayName("§c" + spawns.get(j));
             tName.setItemMeta(me);
             i.setItem(slot, tName);
 
